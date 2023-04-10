@@ -1,0 +1,10 @@
+spring:
+  r2dbc:
+    url: r2dbc:postgres://localhost:5432/account_demo
+    username: postgres
+    password: Qwerty123
+  liquibase:
+    url: jdbc:postgresql://localhost:5432/account_demo
+    user: postgres
+    password: Qwerty123
+    change-log: classpath:db/changelog/db.changelog-master.xml

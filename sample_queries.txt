@@ -1,0 +1,80 @@
+# Create a new person
+
+curl --header "Content-Type: application/json" \
+--request POST \
+--data '{"firstName":"Vasily","lastName":"Pupkin","dateOfBirth":"1980-03-03","passport":"4501777777","contactPhone":"9770000001"}' \
+http://localhost:8080/api/v1/person
+
+curl --header "Content-Type: application/json" \
+--request POST \
+--data '{"firstName":"Lev","middleName":"Nikolaevich","lastName":"Tolstoy","dateOfBirth":"1970-01-01","passport":"4500000001","contactPhone":"9771234567"}' \
+http://localhost:8080/api/v1/person
+
+# Update a new person
+
+curl --header "Content-Type: application/json" \
+--request PUT \
+--data '{"firstName":"Vasily","lastName":"Pupkin","dateOfBirth":"1980-03-03","passport":"4501777777","contactPhone":"9770000001"}' \
+http://localhost:8080/api/v1/person
+
+# Delete a person
+
+curl --request DELETE  http://localhost:8080/api/v1/person/4
+
+# Get person
+
+curl http://localhost:8080/api/v1/person/1
+
+
+# Get all persons
+
+curl http://localhost:8080/api/v1/persons
+
+_____________________________________________________________________
+
+# Create a new account
+
+curl --header "Content-Type: application/json" \
+--request POST \
+--data '{"personId":"1","number":"40817810099910004312","amount":"1000758.55"}' \
+http://localhost:8080/api/v1/account
+
+# Update account with error (amount  changed)
+
+curl --header "Content-Type: application/json" \
+--request PUT \
+--data '{"id":"1", "personId":"1","number":"40817810099910004312","amount":"10058.55"}' \
+http://localhost:8080/api/v1/account
+
+# Close an account
+
+curl --request DELETE  http://localhost:8080/api/v1/account/40817810099910004312
+
+# Get account
+ckear
+curl http://localhost:8080/api/v1/account/40817810099910004312
+
+
+# Get all accounts
+
+curl http://localhost:8080/api/v1/accounts
+
+# History
+
+curl http://localhost:8080/api/v1/account/40817810099910004312/history
+
+
+# Deposit
+
+curl --header "Content-Type: application/json" \
+--request PUT \
+--data "100" \
+http://localhost:8080/api/v1/account/40817810099910004312/deposit
+
+
+# Deposit
+
+curl --header "Content-Type: application/json" \
+--request PUT \
+--data "50" \
+http://localhost:8080/api/v1/account/40817810099910004312/withdraw

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+
+    <changeSet id="create person table" author="mvnikitin">
+        <createTable tableName="person">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="person_id_pk" nullable="false" />
+            </column>
+        <column name="first_name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="middle_name" type="varchar(255)"/>
+            <column name="last_name" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="date_of_birth" type="date">
+                <constraints nullable="false" />
+            </column>
+            <column name="passport" type="char(10)">
+                <constraints nullable="false" />
+            </column>
+            <column name="contact_phone" type="char(10)">
+                <constraints nullable="false" />
+            </column>
+            <column name="created" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+            <column name="changed" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create account table" author="mvnikitin">
+        <createTable tableName="account">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="account_id_pk" nullable="false" />
+            </column>
+            <column name="person_id" type="int">
+                <constraints nullable="false" />
+            </column>
+            <column name="number" type="char(20)">
+                <constraints nullable="false" />
+            </column>
+            <column name="amount" type="number(20,6)">
+                <constraints nullable="false" />
+            </column>
+            <column name="created" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+            <column name="closed" type="timestamp" />
+        </createTable>
+    </changeSet>
+
+    <changeSet id="create transaction table" author="mvnikitin">
+        <createTable tableName="transaction">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="transaction_id_pk" nullable="false" />
+            </column>
+            <column name="account_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <column name="amount" type="number(20,6)">
+                <constraints nullable="false" />
+            </column>
+            <column name="created" type="timestamp">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet  id="add foreignKey to account on person" author="mvnikitin">
+        <addForeignKeyConstraint  baseColumnNames="person_id"
+                                  baseTableName="account"
+                                  constraintName="fk_account_person"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="id"
+                                  referencedTableName="person"
+                                  validate="true"/>
+    </changeSet>
+
+    <changeSet  id="add foreignKey to transaction on account" author="mvnikitin">
+        <addForeignKeyConstraint  baseColumnNames="account_id"
+                                  baseTableName="transaction"
+                                  constraintName="fk_transaction_account"
+                                  onDelete="CASCADE"
+                                  onUpdate="RESTRICT"
+                                  referencedColumnNames="id"
+                                  referencedTableName="account"
+                                  validate="true"/>
+    </changeSet>
+
+    <changeSet  id="add UC to person on passport" author="mvnikitin">
+        <addUniqueConstraint  columnNames="passport"
+                              constraintName="UC_passport"
+                              schemaName="public"
+                              tableName="person"
+                              validate="true"/>
+    </changeSet>
+
+    <changeSet  id="add UC to account on number" author="mvnikitin">
+        <addUniqueConstraint  columnNames="number"
+                              constraintName="UC_account"
+                              schemaName="public"
+                              tableName="account"
+                              validate="true"/>
+    </changeSet>
+
+</databaseChangeLog>

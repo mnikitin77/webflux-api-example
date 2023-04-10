@@ -1,0 +1,16 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ .Chart.Name }}-configmap
+data:
+  application.yaml: |
+    spring:
+      r2dbc:
+        url: r2dbc:postgres://{{ .Values.configMap.db.host }}:{{ .Values.configMap.db.port }}/${POSTGRESQL_DATABASE}
+        username: ${POSTGRESQL_USERNAME}
+        password: ${POSTGRESQL_PASSWORD}
+      liquibase:
+        url: jdbc:postgresql://{{ .Values.configMap.db.host }}:{{ .Values.configMap.db.port }}/${POSTGRESQL_DATABASE}
+        user: ${POSTGRESQL_USERNAME}
+        password: ${POSTGRESQL_PASSWORD}
+        change-log: classpath:db/changelog/db.changelog-master.xml
