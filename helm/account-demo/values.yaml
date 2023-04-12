@@ -8,7 +8,7 @@ image:
   repository: mvnikitin/account-demo
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "3"
+  tag: "4"
 
 application:
   port:
@@ -52,7 +52,7 @@ service:
   name: account-demo-api
 
 ingress:
-  enabled: false
+  enabled: true
   className: ""
   annotations: {}
     # kubernetes.io/ingress.class: nginx

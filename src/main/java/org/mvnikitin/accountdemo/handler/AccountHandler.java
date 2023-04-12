@@ -78,7 +78,6 @@ public class AccountHandler {
                 .flatMap(amount ->
                         service.changeAmount(request.pathVariable("number"), amount)
                 )
-                .doOnError(e -> log.error(e.getMessage()))
                 .flatMap(changed -> ServerResponse.ok().build())
                 .onErrorResume(e -> Mono.error(new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage())));
     }

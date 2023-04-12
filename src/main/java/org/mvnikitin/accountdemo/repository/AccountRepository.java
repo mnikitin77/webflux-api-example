@@ -10,6 +10,8 @@ import reactor.core.publisher.Mono;
 @Repository
 public interface AccountRepository extends ReactiveCrudRepository<Account, Long> {
 
+    Mono<Account> findByNumberAndClosedIsNull(String number);
+
     Mono<Account> findByNumber(String number);
 
     @Modifying

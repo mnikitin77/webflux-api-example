@@ -14,7 +14,7 @@ http://localhost:8080/api/v1/person
 
 curl --header "Content-Type: application/json" \
 --request PUT \
---data '{"firstName":"Vasily","lastName":"Pupkin","dateOfBirth":"1980-03-03","passport":"4501777777","contactPhone":"9770000001"}' \
+--data '{"id":"1",""firstName":"Vasily","lastName":"Pupkin","dateOfBirth":"1980-03-03","passport":"4501777777","contactPhone":"9770000001"}' \
 http://localhost:8080/api/v1/person
 
 # Delete a person
@@ -51,7 +51,7 @@ http://localhost:8080/api/v1/account
 curl --request DELETE  http://localhost:8080/api/v1/account/40817810099910004312
 
 # Get account
-ckear
+
 curl http://localhost:8080/api/v1/account/40817810099910004312
 
 
@@ -68,11 +68,11 @@ curl http://localhost:8080/api/v1/account/40817810099910004312/history
 
 curl --header "Content-Type: application/json" \
 --request PUT \
---data "100" \
+--data 150 \
 http://localhost:8080/api/v1/account/40817810099910004312/deposit
 
 
-# Deposit
+# Withdraw
 
 curl --header "Content-Type: application/json" \
 --request PUT \

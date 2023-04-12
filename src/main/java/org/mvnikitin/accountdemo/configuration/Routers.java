@@ -37,8 +37,10 @@ public class Routers {
                 .andRoute(PUT("/account").and(accept(MediaType.APPLICATION_JSON)), accountHandler::modify)
                 .andRoute(DELETE("/account/{number:[0-9]{20}}"), accountHandler::close)
                 .andRoute(GET("/account/{number:[0-9]{20}}/history"), accountHandler::history)
-                .andRoute(PUT("/account/{number:[0-9]{20}}/deposit"), accountHandler::deposit)
-                .andRoute(PUT("/account/{number:[0-9]{20}}/withdraw"), accountHandler::withdraw);
+                .andRoute(PUT("/account/{number:[0-9]{20}}/deposit")
+                        .and(accept(MediaType.TEXT_PLAIN)), accountHandler::deposit)
+                .andRoute(PUT("/account/{number:[0-9]{20}}/withdraw")
+                        .and(accept(MediaType.TEXT_PLAIN)), accountHandler::withdraw);
 
         return RouterFunctions.nest(path(API_PATH), routes);
     }
